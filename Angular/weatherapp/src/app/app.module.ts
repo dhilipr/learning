@@ -1,18 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router'
 
 
 import { AppComponent } from './app.component';
-
+import { AirportlistComponent } from './airportfinder/airportlist.component';
+import { AirportlistService } from './services/airportlist.service';
+import { appRoutes } from './app.routes'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AirportlistComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [AirportlistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
