@@ -9,21 +9,24 @@ export class AirportlistService {
   
   constructor(private _http:Http) { }
   
-  getAirportList():Observable<IAirport[]>{
-   let url =  "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670,151.1957&radius=9500&types=airport&key=AIzaSyBrg6AzOZOdpN56GeVdxXcxoF9NhZpErII" ;
+  getAirportList(latitue,longitude):Observable<IAirport[]>{
+    let radius = 45500;
+   let url =  `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitue},${longitude}&radius=${radius}&types=airport&key=AIzaSyBrg6AzOZOdpN56GeVdxXcxoF9NhZpErII` ;
    let headers = new Headers({ 'Content-Type': 'application/json'});
    let options = new RequestOptions({headers: headers});
 
     return this._http.get(url,options).map((response:Response)=>{
-      let data= response.json().results;
+      let data= response.json().results.filter(res=>{
+        return res.types.length <= 3;
+      });
       let airportInfo:IAirport[] =[];
       airportInfo= data.map(item => {
-                    return { latitude: item.name,
-                            longitude: item.name,
+                    return { latitude: item.geometry.location.lat,
+                            longitude: item.geometry.location.lng,
                             airportName: item.name,
-                            rating: item.name,
-                            vicinity: item.name,
-                            plotlocation:item.name
+                            rating: item.rating,
+                            vicinity: item.vicinity,
+                            //plotlocation: item.photos[0].html_attributions[0]
                           };
                     });  
         return <IAirport[]>airportInfo;

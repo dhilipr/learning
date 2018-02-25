@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Your Location </h1>
+<div mat-dialog-content>
+  <p>Latitude</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.latitude">
+  </mat-form-field>
+  <p>Longitude</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.longitude">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+</div>
+

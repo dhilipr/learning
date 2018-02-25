@@ -1,23 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { AirportlistService } from '../services/airportlist.service'
+import { IAirport } from '../shared/airports.model'
+import { AirportlistService } from '../services/airportlist.service';
+
 
 @Component({
   selector: 'app-airportlist',
   templateUrl: './airportlist.component.html',
-  styleUrls: ['./airportlist.component.css']
+  styleUrls: ['./airportlist.component.scss']
 })
-export class AirportlistComponent implements OnInit {
-
+export class AirportlistComponent {
+  airportList:IAirport[];
+  norecords:boolean=false;
   constructor(private _airportListservice:AirportlistService) {
-     this._airportListservice.getAirportList().subscribe((data)=>{
-         console.log(data);
-     },
-     (err)=>{
-         console.log(err);
-     })
+    
    }
-
-  ngOnInit() {
-  }
-
+  
+   getLocation(event) {
+      console.log(event);
+         if(event== 'No'){
+            this.norecords=false;
+         }else{         
+              this.norecords=true;
+              this._airportListservice.getAirportList(event.latitude,event.longitude).subscribe((data)=>{
+              this.airportList=data;
+            },
+            (err)=>{
+                console.log(err);
+            })
+       }
+    }
 }

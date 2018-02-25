@@ -1,3 +1,4 @@
-<p>
-  airportlist works!
-</p>
+<app-searchairport (location)="getLocation($event)"></app-searchairport>
+<div *ngIf="norecords">
+<app-displaylist  [airportList]="airportList"></app-displaylist>   
+</div>
