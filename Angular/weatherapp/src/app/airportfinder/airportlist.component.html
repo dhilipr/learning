@@ -1,4 +1,4 @@
 <app-searchairport (location)="getLocation($event)"></app-searchairport>
-<div *ngIf="norecords">
+<div *ngIf="norecords" class="list-display">
 <app-displaylist  [airportList]="airportList"></app-displaylist>   
 </div>

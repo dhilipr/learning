@@ -16,8 +16,13 @@
 
  
     <ng-container matColumnDef="city">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
       <mat-cell *matCellDef="let airport"> {{airport.vicinity}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="distance" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Distance (KM) </mat-header-cell>
+      <mat-cell *matCellDef="let airport"> {{airport.distance}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="rating" >

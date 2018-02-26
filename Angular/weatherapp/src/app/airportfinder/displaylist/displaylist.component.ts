@@ -9,7 +9,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 })
 export class DisplaylistComponent  {
  @Input() airportList:IAirport[];
- displayedColumns = ['airportname', 'city', 'rating'];
+ displayedColumns = ['airportname', 'city', 'distance', 'rating'];
  dataSource:MatTableDataSource<IAirport>;
  @ViewChild(MatPaginator) paginator: MatPaginator;
  @ViewChild(MatSort) sort: MatSort;

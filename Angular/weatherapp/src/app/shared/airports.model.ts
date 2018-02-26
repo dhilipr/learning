@@ -4,5 +4,5 @@ export interface IAirport {
     airportName: string;
     rating: string;
     vicinity: string;
-    plotlocation?: any;
+    distance?: number;
   }

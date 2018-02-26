@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { IAirport } from '../shared/airports.model'
-
+import { IAirport } from '../shared/airports.model';
+import { distance } from 'great-circle';
 
 @Injectable()
 export class AirportlistService {
@@ -21,19 +21,33 @@ export class AirportlistService {
       });
       let airportInfo:IAirport[] =[];
       airportInfo= data.map(item => {
-                    return { latitude: item.geometry.location.lat,
+          let destinationDistace:number= +distance(item.geometry.location.lat, item.geometry.location.lng, latitue, longitude, "KM").toFixed(2);
+                    return {         
+                            latitude: item.geometry.location.lat,
                             longitude: item.geometry.location.lng,
                             airportName: item.name,
                             rating: item.rating,
                             vicinity: item.vicinity,
-                            //plotlocation: item.photos[0].html_attributions[0]
-                          };
+                            distance:  destinationDistace                       
+                           };
                     });  
+        airportInfo.sort(this.compare);     
         return <IAirport[]>airportInfo;
     }).catch(this.handleError)
   }
+
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
+  }
+
+  private compare(a, b) {
+    let comparison = 0;
+    if (a.distance > b.distance) {
+      comparison = 1;
+    } else if (a.distance < b.distance) {
+      comparison = -1;
+    }
+    return comparison;
   }
 }
 
