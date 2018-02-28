@@ -11,22 +11,41 @@ import { AirportlistService } from '../services/airportlist.service';
 export class AirportlistComponent {
   airportList:IAirport[];
   norecords:boolean=false;
+  latitude:number;
+  longitude:number; 
   constructor(private _airportListservice:AirportlistService) {
     
    }
+   ngOnInit(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position)=>{
+        this.latitude=position.coords.latitude;
+        this.longitude= position.coords.longitude; 
+        this.searchAirport(this.latitude,this.longitude);
+      });
+      } else {
+        this.latitude=null;
+        this.longitude=null; 
+         console.log("Geolocation is not supported by this browser.");
+      }  
+  }
   
    getLocation(event) {
-      console.log(event);
+    
          if(event== 'No'){
             this.norecords=false;
          }else{         
-              this.norecords=true;
-              this._airportListservice.getAirportList(event.latitude,event.longitude).subscribe((data)=>{
-              this.airportList=data;
-            },
-            (err)=>{
-                console.log(err);
-            })
+          this.searchAirport(event.latitude,event.longitude)
        }
+    }
+
+    searchAirport(latitude,longitude){
+      this.norecords=true;
+      this._airportListservice.getAirportList(latitude,longitude).subscribe((data)=>{
+      this.airportList=data;
+    },
+    (err)=>{
+        console.log(err);
+    })
     }
 }
