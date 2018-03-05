@@ -9,6 +9,7 @@ import { MaterialModule } from '../shared/material.module';
 import { SearchairportComponent } from './searchairport/searchairport.component';
 import { LocationmodalComponent } from './locationmodal/locationmodal.component';
 import { FormsModule } from '@angular/forms';
+import { DisplaymapComponent } from './displaymap/displaymap.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     AirportlistComponent,
     DisplaylistComponent,
     SearchairportComponent,
-    LocationmodalComponent
+    LocationmodalComponent,
+    DisplaymapComponent
   ],
     entryComponents: [LocationmodalComponent],
   providers: [AirportlistService]

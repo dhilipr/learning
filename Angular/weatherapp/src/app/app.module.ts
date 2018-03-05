@@ -7,7 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { MaterialModule } from './shared/material.module';
-import { AirportfinderModule } from './airportfinder/airportfinder.module'
+import { AirportfinderModule } from './airportfinder/airportfinder.module';
+import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { AirportfinderModule } from './airportfinder/airportfinder.module'
     MaterialModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    AirportfinderModule
+    AirportfinderModule,
+    AgmCoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
