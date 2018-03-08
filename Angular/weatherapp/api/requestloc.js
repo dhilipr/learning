@@ -11,13 +11,11 @@ const request = require('request');
  
 
 const options = {  
-  url: 'https://www.reddit.com/r/funny.json',
-  proxy: 'https://proxy.tcs.com',
+  url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitue},${longitude}&radius=${radius}&types=airport&key=AIzaSyBYkGygaV8xFLmF7aTmTUilXwYtHaGGEQw` ,
   method: 'GET',
   headers: {
       'Accept': 'application/json',
-      'Accept-Charset': 'utf-8',
-      'User-Agent': 'my-reddit-client'
+      'Accept-Charset': 'utf-8'
   }
 };
 

@@ -1,14 +1,29 @@
 var request = require('request');
+let radius = 45500;
+let latitue = 13.2;
+let longitude = 80.0;
 
-const url= "https://maps.googleapis.com/maps/api/geocode/json?address=Florence&key=AIzaSyBYkGygaV8xFLmF7aTmTUilXwYtHaGGEQw";
+
+const options = {  
+  url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitue},${longitude}&radius=${radius}&types=airport&key=AIzaSyBYkGygaV8xFLmF7aTmTUilXwYtHaGGEQw` ,
+  method: 'GET',
+  headers: {
+      'Accept': 'application/json',
+      'Accept-Charset': 'utf-8'
+  }
+};
 
 var appController = function(){
     var get =function(req,res,next) {
-        request(url,(error, response, body) => {
-            let json = JSON.parse(body);
+        let json;
+        request(options, function(err, res, body) { 
+            json = JSON.parse(body);
             console.log(json);
-          }
-    );
+            
+        });
+        res.send(json);
+        return json;
+    
   }
     return {get:get};
 }
