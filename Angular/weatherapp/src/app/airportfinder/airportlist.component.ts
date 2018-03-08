@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { IAirport } from '../shared/airports.model'
-import { AirportlistService } from '../services/airportlist.service';
+import { IAppState, AirportActions } from '../store';
+import { NgRedux} from 'ng2-redux';
 
 
 @Component({
   selector: 'app-airportlist',
   templateUrl: './airportlist.component.html',
-  styleUrls: ['./airportlist.component.scss']
+  styleUrls: ['./airportlist.component.css']
 })
 export class AirportlistComponent {
-  airportList:IAirport[];
   norecords:boolean=false;
   latitude:number;
   longitude:number; 
-  constructor(private _airportListservice:AirportlistService) {
+  airportListFetched;
+
+  constructor(
+    private ngRedux: NgRedux<IAppState>,
+    private airportActions:AirportActions
+  ) {
     
    }
    ngOnInit(){
@@ -28,6 +33,7 @@ export class AirportlistComponent {
         this.longitude=null; 
          console.log("Geolocation is not supported by this browser.");
       }  
+      
   }
   
    getLocation(event) {
@@ -41,11 +47,7 @@ export class AirportlistComponent {
 
     searchAirport(latitude,longitude){
       this.norecords=true;
-      this._airportListservice.getAirportList(latitude,longitude).subscribe((data)=>{
-      this.airportList=data;
-    },
-    (err)=>{
-        console.log(err);
-    })
+      this.airportActions.searchAirports(latitude,longitude);   
     }
+ 
 }

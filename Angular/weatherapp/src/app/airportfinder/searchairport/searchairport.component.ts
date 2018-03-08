@@ -5,7 +5,7 @@ import {LocationmodalComponent} from '../locationmodal/locationmodal.component'
 @Component({
   selector: 'app-searchairport',
   templateUrl: './searchairport.component.html',
-  styleUrls: ['./searchairport.component.scss']
+  styleUrls: ['./searchairport.component.css']
 })
 export class SearchairportComponent  {
 

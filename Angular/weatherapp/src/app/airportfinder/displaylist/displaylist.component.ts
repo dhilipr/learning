@@ -1,30 +1,34 @@
 import { Component, OnChanges, Input, ViewChild} from '@angular/core';
 import { IAirport } from '../../shared/airports.model'
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { select} from 'ng2-redux';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-displaylist',
   templateUrl: './displaylist.component.html',
-  styleUrls: ['./displaylist.component.scss']
+  styleUrls: ['./displaylist.component.css']
 })
 export class DisplaylistComponent  {
- @Input() airportList:IAirport[];
+ airportList;
  displayedColumns = ['airportname', 'city', 'distance', 'rating'];
  dataSource:MatTableDataSource<IAirport>;
  @ViewChild(MatPaginator) paginator: MatPaginator;
  @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+ @select('airports') airportList$:Observable<IAirport>
 
-  ngOnChanges() {
-  
-    this.dataSource = new MatTableDataSource<IAirport>(this.airportList) ;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  constructor() {  
+   }
 
-  }
-
-  ngAfterViewInit() {
+  ngOnInit() {
+      this.airportList$.subscribe((airports)=>{
+      this.airportList=airports;
+      this.dataSource = new MatTableDataSource<IAirport>(this.airportList) ;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+   })    
+   
   }
    
   applyFilter(filterValue: string) {
@@ -33,5 +37,5 @@ export class DisplaylistComponent  {
     this.dataSource.filter = filterValue;
   }
 
-
+ 
 }

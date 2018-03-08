@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 @Component({
   selector: 'app-locationmodal',
   templateUrl: './locationmodal.component.html',
-  styleUrls: ['./locationmodal.component.scss']
+  styleUrls: ['./locationmodal.component.css']
 })
 export class LocationmodalComponent {
 

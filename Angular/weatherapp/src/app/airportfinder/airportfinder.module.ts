@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AirportlistComponent } from './airportlist.component';
-import { AirportlistService } from '../services/airportlist.service';
 import { DisplaylistComponent } from './displaylist/displaylist.component';
 import { airportfinderRoutes } from './airportfinder.routes'
 import { RouterModule } from '@angular/router';
@@ -27,6 +26,6 @@ import { DisplaymapComponent } from './displaymap/displaymap.component';
     DisplaymapComponent
   ],
     entryComponents: [LocationmodalComponent],
-  providers: [AirportlistService]
+  providers: []
 })
 export class AirportfinderModule { }

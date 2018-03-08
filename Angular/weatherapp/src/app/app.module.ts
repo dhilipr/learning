@@ -8,8 +8,10 @@ import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { MaterialModule } from './shared/material.module';
 import { AirportfinderModule } from './airportfinder/airportfinder.module';
+import { AirportlistService } from './services/airportlist.service';
 import { AgmCoreModule } from '@agm/core';
-
+import { NgReduxModule, NgRedux } from 'ng2-redux';
+import { store, IAppState, AirportActions } from './store'
 
 @NgModule({
   declarations: [
@@ -23,9 +25,14 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     RouterModule.forRoot(appRoutes),
     AirportfinderModule,
-    AgmCoreModule
+    AgmCoreModule,
+    NgReduxModule
   ],
-  providers: [],
+  providers: [AirportlistService,AirportActions],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(ngRedux:NgRedux<IAppState>){
+        ngRedux.provideStore(store);
+    }
+ }
