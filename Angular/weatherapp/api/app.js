@@ -1,18 +1,27 @@
-var express= require('express');
+const express= require('express');
+const path = require('path');
+const app= express();
 
-var app= express();
+const http = require('http');
 
-var port = 3000;
+
+const port = 3000;
 
 appRouter=require('./Routes/appRoutes')();
 
 app.use('/api', appRouter);
 
-app.get('/', function(req,res){
-     res.send('Welcome');
-});
+app.use(express.static(path.join(__dirname, '../dist')));
 
-app.listen(port, function(){
-    console.log("App Works");
-});
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  });
+  
+ 
+  const server = http.createServer(app);
+
+  
+  server.listen(port, () => console.log(`API running on localhost:${port}`));
 

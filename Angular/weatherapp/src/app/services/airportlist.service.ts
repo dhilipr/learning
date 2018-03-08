@@ -2,26 +2,39 @@ import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { IAirport } from '../shared/airports.model';
-import { distance } from 'great-circle';
+import { geodist } from 'geodist';
+import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class AirportlistService {
   
-  constructor(private _http:Http) { }
+  constructor(private _http:Http) { 
+  }
   
-  getAirportList(latitue,longitude):Observable<IAirport[]>{
-    let radius = 45500;
-   let url =  `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitue},${longitude}&radius=${radius}&types=airport&key=AIzaSyBYkGygaV8xFLmF7aTmTUilXwYtHaGGEQw` ;
+  getAirportList(latitude,longitude):Observable<IAirport[]>{
+  
+  let start= {lat:latitude,lon:longitude}
+                
+  let url=`/api/locations?lat=${latitude}&long=${longitude}`;
+  
    let headers = new Headers({ 'Content-Type': 'application/json'});
    let options = new RequestOptions({headers: headers});
    
     return this._http.get(url,options).map((response:Response)=>{
-      let data= response.json().results.filter(res=>{
-        return res.types.length <= 3;
-      });
+      console.log(response)
+     
+        var data= response.json().results.filter(res=>{
+          return res.types.length <= 3;
+        });
+      
+      
       let airportInfo:IAirport[] =[];
       airportInfo= data.map(item => {
-          let destinationDistace:number= +distance(item.geometry.location.lat, item.geometry.location.lng, latitue, longitude, "KM").toFixed(2);
+          let destination= {lat:item.geometry.location.lat,
+                            lon:item.geometry.location.lng
+                            }
+          let destinationDistace:number= 10;//+geodist(start,destination,{unit:'km'}).toFixed(2);
                     return {         
                             latitude: item.geometry.location.lat,
                             longitude: item.geometry.location.lng,

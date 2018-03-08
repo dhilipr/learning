@@ -10,6 +10,7 @@ import { MaterialModule } from './shared/material.module';
 import { AirportfinderModule } from './airportfinder/airportfinder.module';
 import { AirportlistService } from './services/airportlist.service';
 import { AgmCoreModule } from '@agm/core';
+
 import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { store, IAppState, AirportActions } from './store'
 
