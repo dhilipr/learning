@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { IAirport } from '../shared/airports.model';
-import { geodist } from 'geodist';
+import { DistanceCalculator } from '../shared/distanceCalculator';
 import 'rxjs/add/operator/map';
 
 
 @Injectable()
 export class AirportlistService {
   
-  constructor(private _http:Http) { 
+  constructor(private _http:Http, private distanceCalculator:DistanceCalculator) { 
   }
   
   getAirportList(latitude,longitude):Observable<IAirport[]>{
   
-  let start= {lat:latitude,lon:longitude}
+  let start= {latitude:latitude,longitude:longitude}
                 
   let url=`/api/locations?lat=${latitude}&long=${longitude}`;
   
@@ -31,17 +31,17 @@ export class AirportlistService {
       
       let airportInfo:IAirport[] =[];
       airportInfo= data.map(item => {
-          let destination= {lat:item.geometry.location.lat,
-                            lon:item.geometry.location.lng
+          let destination= {latitude:item.geometry.location.lat,
+                            longitude:item.geometry.location.lng
                             }
-          let destinationDistace:number= 10;//+geodist(start,destination,{unit:'km'}).toFixed(2);
+          let destinationDistace:number= +this.distanceCalculator.haversine(start,destination,{unit:'km'});
                     return {         
                             latitude: item.geometry.location.lat,
                             longitude: item.geometry.location.lng,
                             airportName: item.name,
                             rating: item.rating,
                             vicinity: item.vicinity,
-                            distance:  destinationDistace                       
+                            distance:  destinationDistace.toFixed(2)                   
                            };
                     });  
         airportInfo.sort(this.compare);     

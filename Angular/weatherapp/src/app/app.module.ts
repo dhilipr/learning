@@ -12,7 +12,9 @@ import { AirportlistService } from './services/airportlist.service';
 import { AgmCoreModule } from '@agm/core';
 
 import { NgReduxModule, NgRedux } from 'ng2-redux';
-import { store, IAppState, AirportActions } from './store'
+import { store, IAppState, AirportActions } from './store';
+import { DistanceCalculator } from './shared/distanceCalculator';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import { store, IAppState, AirportActions } from './store'
     AgmCoreModule,
     NgReduxModule
   ],
-  providers: [AirportlistService,AirportActions],
+  providers: [AirportlistService,AirportActions,DistanceCalculator],
   bootstrap: [AppComponent]
 })
 export class AppModule {
