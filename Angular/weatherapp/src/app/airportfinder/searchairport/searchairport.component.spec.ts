@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchairportComponent } from './searchairport.component';
+import { MaterialModule } from '../../shared/material.module';
+import { FormsModule } from '@angular/forms';
+import { MatDialog  } from '@angular/material/dialog';
+import { LocationmodalComponent } from '../locationmodal/locationmodal.component'
 
 describe('SearchairportComponent', () => {
   let component: SearchairportComponent;
@@ -8,7 +12,9 @@ describe('SearchairportComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchairportComponent ]
+      declarations: [ SearchairportComponent, LocationmodalComponent ],
+      providers:[ MatDialog ],
+      imports:[MaterialModule, FormsModule]
     })
     .compileComponents();
   }));

@@ -1,18 +1,53 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed ,inject  } from '@angular/core/testing';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { LocationmodalComponent } from './locationmodal.component';
+import { MaterialModule } from '../../shared/material.module';
+import { FormsModule } from '@angular/forms';
+import { MatDialog, MatDialogModule} from '@angular/material';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
-describe('LocationmodalComponent', () => {
+
+xdescribe('LocationmodalComponent', () => {
   let component: LocationmodalComponent;
   let fixture: ComponentFixture<LocationmodalComponent>;
 
+  let dialog: MatDialog;
+  let overlayContainer: OverlayContainer;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationmodalComponent ]
+      declarations: [ LocationmodalComponent ],
+      imports:[MaterialModule,MatDialogModule, FormsModule],
     })
-    .compileComponents();
+    TestBed.overrideModule(BrowserDynamicTestingModule, {
+      set: {
+        entryComponents: [LocationmodalComponent]
+      }
+    });
+
+    TestBed.compileComponents();
   }));
 
+  
+  beforeEach(inject([MatDialog, OverlayContainer],
+    (d: MatDialog, oc: OverlayContainer) => {
+      dialog = d;
+      overlayContainer = oc;
+    })
+  );
+
+  afterEach(() => {
+    overlayContainer.ngOnDestroy();
+  });
+
+  xit('should open a dialog with a component', () => {
+    const dialogRef = dialog.open(LocationmodalComponent, {
+      data: { param: '1' }
+    });
+
+    // verify
+    expect(dialogRef.componentInstance instanceof LocationmodalComponent).toBe(true);
+  });
   beforeEach(() => {
     fixture = TestBed.createComponent(LocationmodalComponent);
     component = fixture.componentInstance;

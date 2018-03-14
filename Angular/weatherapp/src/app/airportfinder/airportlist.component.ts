@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IAirport } from '../shared/airports.model'
 import { IAppState, AirportActions } from '../store';
-import { NgRedux} from 'ng2-redux';
+//import { NgRedux} from 'ng2-redux';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class AirportlistComponent {
   airportListFetched;
 
   constructor(
-    private ngRedux: NgRedux<IAppState>,
+  //  private ngRedux: NgRedux<IAppState>,
     private airportActions:AirportActions
   ) {
     

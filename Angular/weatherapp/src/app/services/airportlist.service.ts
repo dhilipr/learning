@@ -8,15 +8,18 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AirportlistService {
-  
+  airportInfo:IAirport[] =[];
   constructor(private _http:Http, private distanceCalculator:DistanceCalculator) { 
   }
   
   getAirportList(latitude,longitude):Observable<IAirport[]>{
   
   let start= {latitude:latitude,longitude:longitude}
-                
-  let url=`/api/locations?lat=${latitude}&long=${longitude}`;
+  let radius= 455000;
+  
+  let url= `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&types=airport&key=AIzaSyBYkGygaV8xFLmF7aTmTUilXwYtHaGGEQw` 
+
+  //let url=`/api/locations?lat=${latitude}&long=${longitude}`;
   
    let headers = new Headers({ 'Content-Type': 'application/json'});
    let options = new RequestOptions({headers: headers});
@@ -29,8 +32,8 @@ export class AirportlistService {
         });
       
       
-      let airportInfo:IAirport[] =[];
-      airportInfo= data.map(item => {
+  
+      this.airportInfo= data.map(item => {
           let destination= {latitude:item.geometry.location.lat,
                             longitude:item.geometry.location.lng
                             }
@@ -39,13 +42,13 @@ export class AirportlistService {
                             latitude: item.geometry.location.lat,
                             longitude: item.geometry.location.lng,
                             airportName: item.name,
-                            rating: item.rating,
                             vicinity: item.vicinity,
                             distance:  destinationDistace.toFixed(2)                   
                            };
                     });  
-        airportInfo.sort(this.compare);     
-        return <IAirport[]>airportInfo;
+        this.airportInfo.sort(this.compare);
+        console.log(this.airportInfo);     
+        return <IAirport[]>this.airportInfo;
     }).catch(this.handleError)
   }
 
@@ -53,7 +56,7 @@ export class AirportlistService {
     return Observable.throw(error.statusText);
   }
 
-  private compare(a, b) {
+   compare(a, b) {
     let comparison = 0;
     if (a.distance > b.distance) {
       comparison = 1;

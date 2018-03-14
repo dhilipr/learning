@@ -2,7 +2,7 @@ import { Component, OnChanges, Input, ViewChild} from '@angular/core';
 import { IAirport } from '../../shared/airports.model'
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { select} from 'ng2-redux';
-import { Observable } from 'rxjs/Observable';
+import {Observable} from "rxjs/Rx";
 
 @Component({
   selector: 'app-displaylist',
@@ -22,8 +22,9 @@ export class DisplaylistComponent  {
    }
 
   ngOnInit() {
-      this.airportList$.subscribe((airports)=>{
+  this.airportList$.subscribe((airports)=>{
       this.airportList=airports;
+      console.log(airports)
       this.dataSource = new MatTableDataSource<IAirport>(this.airportList) ;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

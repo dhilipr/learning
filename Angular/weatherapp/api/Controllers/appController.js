@@ -3,8 +3,8 @@ var request = require('request');
 var appController = function(){
     var get =function(req,res,next) {
     
-    let latitude= req.param('lat');
-    let longitude= req.param('long');
+    let latitude= req.params.lat;
+    let longitude= req.params.long;
     let radius = 45500;
 
         const options = {  
