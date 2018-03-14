@@ -1,4 +1,4 @@
-# Create image based on the official Node 6 image from dockerhub
+# Create image based on the official Node 6 image from the dockerhub
 FROM node:6
 
 # Create a directory where our app will be placed
@@ -17,7 +17,7 @@ RUN npm install
 COPY . /usr/src/app
 
 # Expose the port the app runs in
-EXPOSE 4200
+EXPOSE 3000
 
 # Serve the app
 CMD ["npm", "start"]
