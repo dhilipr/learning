@@ -25,7 +25,7 @@ export class AirportlistService {
    let options = new RequestOptions({headers: headers});
    
     return this._http.get(url,options).map((response:Response)=>{
-      console.log(response)
+     
      
         var data= response.json().results.filter(res=>{
           return res.types.length <= 3;
@@ -47,7 +47,7 @@ export class AirportlistService {
                            };
                     });  
         this.airportInfo.sort(this.compare);
-        console.log(this.airportInfo);     
+         
         return <IAirport[]>this.airportInfo;
     }).catch(this.handleError)
   }

@@ -10,23 +10,33 @@ import { SearchairportComponent } from './airportfinder/searchairport/searchairp
 import { DisplaylistComponent } from './airportfinder/displaylist/displaylist.component';
 import { MaterialModule } from './shared/material.module';
 import { FormsModule } from '@angular/forms';
+import {AirportActions } from './store';
+import { AirportlistService } from './services/airportlist.service';
+import { DistanceCalculator } from './shared/distanceCalculator';
 
-xdescribe('Router: App', () => {
+import { NgReduxModule} from 'ng2-redux';
+import { HttpModule } from '@angular/http';
+
+
+
+
+describe('Router: App', () => {
 
   let location: Location;
   let router: Router;
   let fixture;
+  let url;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ MaterialModule,FormsModule, RouterTestingModule.withRoutes(airportfinderRoutes)],
-      declarations: [AppComponent,AirportlistComponent,SearchairportComponent,DisplaylistComponent]
+      imports: [ MaterialModule,FormsModule,NgReduxModule,HttpModule, RouterTestingModule.withRoutes(airportfinderRoutes)],
+      declarations: [AppComponent,AirportlistComponent,SearchairportComponent,DisplaylistComponent],
+      providers:[AirportActions,AirportlistService,DistanceCalculator]
      
     });
 
     router = TestBed.get(Router);
     location = TestBed.get(Location);
-
     fixture = TestBed.createComponent(AppComponent);
     router.initialNavigation();
   });
@@ -41,16 +51,35 @@ xdescribe('Router: App', () => {
     expect(done).toBeTruthy();
   }));
 
-  xit('navigate to "" redirects you to /airportfind', fakeAsync(() => {
-    router.navigate(['']);
-    tick(50);
-    expect(location.path()).toBe('/airportfind');
+  it('navigate to invalid route throws error', fakeAsync(() => {
+
+    router.navigate(['hghj']).then((resolved)=>{
+     
+    }).catch((err)=>{
+      expect(err).toBeTruthy();
+    });
   }));
 
-  xit('navigate to "airportfind" takes you to /airportfind', fakeAsync(() => {
-    router.navigate(['/airportfind']);
+  it('navigate to "" takes you to /airportfind', fakeAsync(() => {
+    router.navigate(['']);
+    
     tick(50);
-    expect(location.path()).toBe('/airportfind');
+    location.subscribe((val)=>{
+      url=val.url;
+      expect(url).toBe('/airportfind');
+    }); 
+    
+  }));
+
+  it('navigate to "airportfind" takes you to /airportfind', fakeAsync(() => {
+    router.navigate(['airportfind']);
+    
+    tick(50);
+    location.subscribe((val)=>{
+      url=val.url;
+      expect(url).toBe('/airportfind');
+    }); 
+    
   }));
   
 });

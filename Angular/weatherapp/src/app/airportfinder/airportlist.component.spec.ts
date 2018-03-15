@@ -5,20 +5,22 @@ import { SearchairportComponent } from './searchairport/searchairport.component'
 import { DisplaylistComponent } from './displaylist/displaylist.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './../shared/material.module';
-import { IAppState, AirportActions } from '../store';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-//import { NgRedux} from 'ng2-redux';
+import {AirportActions } from '../store';
+import { AirportlistService } from '../services/airportlist.service';
+import { DistanceCalculator } from '../shared/distanceCalculator';
 
+import { NgReduxModule} from 'ng2-redux';
+import { HttpModule } from '@angular/http';
 
-xdescribe('AirportlistComponent', () => {
+describe('AirportlistComponent', () => {
   let component: AirportlistComponent;
   let fixture: ComponentFixture<AirportlistComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AirportlistComponent,SearchairportComponent,DisplaylistComponent ],
-      providers:[MatTableDataSource,MatPaginator ,MatSort ],
-      imports:[MaterialModule,]
+      providers:[AirportActions,AirportlistService,DistanceCalculator],
+      imports:[MaterialModule,NgReduxModule,HttpModule]
     })
     .compileComponents();
   }));
