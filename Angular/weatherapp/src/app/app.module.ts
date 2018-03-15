@@ -1,3 +1,5 @@
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -22,6 +24,7 @@ import { DistanceCalculator } from './shared/distanceCalculator';
   ],
   imports: [
     BrowserModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),    
     HttpModule,
     BrowserAnimationsModule,
     MaterialModule,

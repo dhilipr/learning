@@ -40,14 +40,6 @@ xdescribe('LocationmodalComponent', () => {
     overlayContainer.ngOnDestroy();
   });
 
-  xit('should open a dialog with a component', () => {
-    const dialogRef = dialog.open(LocationmodalComponent, {
-      data: { param: '1' }
-    });
-
-    // verify
-    expect(dialogRef.componentInstance instanceof LocationmodalComponent).toBe(true);
-  });
   beforeEach(() => {
     fixture = TestBed.createComponent(LocationmodalComponent);
     component = fixture.componentInstance;
