@@ -22,17 +22,18 @@ export class AirportlistComponent {
     
    }
    ngOnInit(){
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position)=>{
-        this.latitude=position.coords.latitude;
-        this.longitude= position.coords.longitude; 
-        this.searchAirport(this.latitude,this.longitude);
-      });
-      } else {
-        this.latitude=null;
-        this.longitude=null; 
-         console.log("Geolocation is not supported by this browser.");
-      }  
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition((position)=>{
+    //     this.latitude=position.coords.latitude;
+    //     this.longitude= position.coords.longitude; 
+    //     this.searchAirport(this.latitude,this.longitude);
+    //   });
+    //   } else {
+    //     this.latitude=null;
+    //     this.longitude=null; 
+    //      console.log("Geolocation is not supported by this browser.");
+    //   }  
+    this.searchAirport('53.3','4.8');
       
   }
   

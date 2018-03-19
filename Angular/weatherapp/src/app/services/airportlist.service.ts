@@ -17,9 +17,9 @@ export class AirportlistService {
   let start= {latitude:latitude,longitude:longitude}
   let radius= 455000;
   
-  let url= `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&types=airport&key=AIzaSyBYkGygaV8xFLmF7aTmTUilXwYtHaGGEQw` 
+  //let url= `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&types=airport&key=AIzaSyBYkGygaV8xFLmF7aTmTUilXwYtHaGGEQw` 
 
-  //let url=`/api/locations?lat=${latitude}&long=${longitude}`;
+  let url=`/api/locations?lat=${latitude}&long=${longitude}`;
   
    let headers = new Headers({ 'Content-Type': 'application/json'});
    let options = new RequestOptions({headers: headers});

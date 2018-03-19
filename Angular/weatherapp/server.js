@@ -5,19 +5,19 @@ const app= express();
 const http = require('http');
 
 
-const port = 3000;
+const port = 4200;
 
-appRouter=require('./Routes/appRoutes')();
+appRouter=require('./api/Routes/appRoutes')();
 
 app.use('/api', appRouter);
 
- app.use(express.static(path.join(__dirname, '../weatherapp/dist')));
+app.use(express.static(path.join(__dirname, './dist')));
 
 
 
- app.get('*', (req, res) => {
-     res.sendFile(path.join(__dirname, '../weatherapp/dist/index.html'));
-   });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './dist/index.html'));
+  });
   
  
   const server = http.createServer(app);
