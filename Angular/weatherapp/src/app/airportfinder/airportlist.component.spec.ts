@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './../shared/material.module';
 import {AirportActions } from '../store';
 import { AirportlistService } from '../services/airportlist.service';
-import { DistanceCalculator } from '../shared/distanceCalculator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgReduxModule} from 'ng2-redux';
@@ -20,7 +19,7 @@ describe('AirportlistComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AirportlistComponent,SearchairportComponent,DisplaylistComponent ],
-      providers:[AirportActions,AirportlistService,DistanceCalculator],
+      providers:[AirportActions,AirportlistService],
       imports:[MaterialModule,NgReduxModule,HttpModule,BrowserAnimationsModule]
     })
     .compileComponents();

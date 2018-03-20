@@ -15,7 +15,6 @@ import { AgmCoreModule } from '@agm/core';
 
 import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { store, IAppState, AirportActions } from './store';
-import { DistanceCalculator } from './shared/distanceCalculator';
 
 
 @NgModule({
@@ -34,7 +33,7 @@ import { DistanceCalculator } from './shared/distanceCalculator';
     AgmCoreModule,
     NgReduxModule
   ],
-  providers: [AirportlistService,AirportActions,DistanceCalculator],
+  providers: [AirportlistService,AirportActions],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

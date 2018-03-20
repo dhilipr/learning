@@ -6,8 +6,6 @@ import { Http, ResponseOptions, Response, BaseRequestOptions } from '@angular/ht
 
 import { MockBackend } from '@angular/http/testing';
 
-import { DistanceCalculator } from '../shared/distanceCalculator';
-
 describe('AirportlistService', () => {
   let service: AirportlistService;
   let backend: MockBackend;
@@ -15,7 +13,7 @@ describe('AirportlistService', () => {
   
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AirportlistService , DistanceCalculator,
+      providers: [AirportlistService ,
         MockBackend,
         BaseRequestOptions,
         {
@@ -38,21 +36,17 @@ describe('AirportlistService', () => {
 
 
         it('search should return SearchItems', fakeAsync(() => {
-          let response = {
-              "results" : [
-                 {
-                    "geometry" : {
-                       "location" : {
-                          "lat" : 12.9918134,
-                          "lng" : 80.18043080000001
-                       },
-                    },
-                    "name" : "Business Aviation Terminal",
-                    "types" : [ "airport", "point_of_interest", "establishment" ],
-                    "vicinity" : "Meenambakkam"
+          let response = 
+              [
+                {
+                  airportName:"CHENNAI AIRPORT MAA",
+                  distance:1.94,
+                  latitude:"13.0656496",
+                  longitude:"80.2745478",
+                  vicinity:"Meenambakkam"  
                  }
-              ]
-           }
+              ];
+           
           
       
           // When the request subscribes for results on a connection, return a fake response
@@ -74,13 +68,9 @@ describe('AirportlistService', () => {
           console.log(service.airportInfo);
        
           expect(service.airportInfo.length).toBe(1);
-          expect(service.airportInfo[0].airportName).toBe('Business Aviation Terminal');
+          expect(service.airportInfo[0].airportName).toBe('CHENNAI AIRPORT MAA');
           expect(service.airportInfo[0].vicinity).toBe("Meenambakkam");
         }));
         
-        it("should compare two values",()=>{
-          let a={distance:10};
-          let b={distance:5};
-          expect(service.compare(a,b)).toBe(1);
-        });
+      
 });

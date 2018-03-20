@@ -12,8 +12,6 @@ import { MaterialModule } from './shared/material.module';
 import { FormsModule } from '@angular/forms';
 import {AirportActions } from './store';
 import { AirportlistService } from './services/airportlist.service';
-import { DistanceCalculator } from './shared/distanceCalculator';
-
 import { NgReduxModule} from 'ng2-redux';
 import { HttpModule } from '@angular/http';
 
@@ -31,7 +29,7 @@ describe('Router: App', () => {
     TestBed.configureTestingModule({
       imports: [ MaterialModule,FormsModule,NgReduxModule,HttpModule, RouterTestingModule.withRoutes(airportfinderRoutes)],
       declarations: [AppComponent,AirportlistComponent,SearchairportComponent,DisplaylistComponent],
-      providers:[AirportActions,AirportlistService,DistanceCalculator]
+      providers:[AirportActions,AirportlistService]
      
     });
 
