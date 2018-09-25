@@ -15,11 +15,13 @@ import { AgmCoreModule } from '@agm/core';
 
 import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { store, IAppState, AirportActions } from './store';
-
+import { EnrolComponent } from './enrollment/enrol/enrol.component';
+import  { SpeechRecognitionService } from './services/voice.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    EnrolComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,7 @@ import { store, IAppState, AirportActions } from './store';
     AgmCoreModule,
     NgReduxModule
   ],
-  providers: [AirportlistService,AirportActions],
+  providers: [AirportlistService,AirportActions,SpeechRecognitionService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

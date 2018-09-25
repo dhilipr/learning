@@ -13,6 +13,10 @@ app.use('/api', appRouter);
 
 app.use(express.static(path.join(__dirname, './dist')));
 
+app.get('/enroll', (req, res) => {
+  console.log(req);
+  console.log(res);
+});
 
 
 app.get('*', (req, res) => {

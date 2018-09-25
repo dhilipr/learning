@@ -1,0 +1,25 @@
+<div class="enrollment">
+<mat-card>
+<mat-card-title>Country and Language Preferences</mat-card-title>
+<div >
+  
+  <mat-form-field>
+    <input matInput placeholder="Country" name="txtSpeechSearchMovieName" id="txtSpeechSearchMovieName" value=""
+   [(ngModel)]="speechData">
+   <i class="glyphicon glyphicon-volume-up" (click)="activateSpeech()">
+  </i> 
+  </mat-form-field>
+  
+  <mat-form-field>
+    <input matInput placeholder="Language" name="txtSpeechSearchMovieName" id="txtSpeechSearchMovieName" value=""
+    [(ngModel)]="languagespeechData">
+    <i class="glyphicon glyphicon-volume-up" (click)="activateLanguageSpeech()">
+    </i> 
+  </mat-form-field>
+</div>
+<div >
+  <button mat-button >Submit</button>
+</div>
+</mat-card>
+</div>
+
